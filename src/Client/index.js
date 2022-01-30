@@ -50,6 +50,7 @@ class Client extends EventEmitter {
       autoDelete: true
     }, (queue) => {
       this.cacheReplyName = queue.name
+      this.emit('ready')
       // console.log('Cache Reply Queue: ', this.cacheReplyName)
       queue.subscribe(function (message, _, headers) {
         if (headers.type === '404') {
