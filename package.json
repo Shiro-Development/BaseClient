@@ -1,0 +1,30 @@
+{
+  "name": "shiro",
+  "version": "0.0.1",
+  "description": "Shiro using an external gateway",
+  "main": "index.js",
+  "dependencies": {
+    "amqp": "git+https://github.com/Luke-6723/node-amqp.git",
+    "axios": "^0.24.0",
+    "chalk": "^4.1.2",
+    "dotenv": "^10.0.0",
+    "form-data": "^4.0.0",
+    "fs": "0.0.1-security",
+    "influx": "^5.9.2",
+    "nanoid": "^3.2.0",
+    "node-docker-api": "^1.1.22",
+    "parse-duration": "^1.0.2",
+    "pretty-bytes": "^5.6.0",
+    "pretty-ms": "^7.0.1",
+    "redis": "^3.1.2",
+    "zlib": "^1.0.5"
+  },
+  "devDependencies": {
+    "clean-jsdoc-theme": "^3.3.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

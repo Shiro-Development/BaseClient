@@ -1,0 +1,31 @@
+{
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "recurseDepth": 20,
+  "source": {
+      "includePattern": ".+\\.js(doc|x)?$",
+      "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "tags": {
+      "allowUnknownTags": true,
+      "dictionaries": ["jsdoc","closure"]
+  },
+  "templates": {
+      "cleverLinks": false,
+      "monospaceLinks": false,
+      "templates": {
+        "default": {
+            "outputSourceFiles": false
+        }
+      }
+  },
+  "opts": {
+    "private": true,
+    "destination": "./docs/",
+    "template": "./node_modules/clean-jsdoc-theme",
+    "theme_opts": {
+      "theme": "dark"
+    }
+  }
+}

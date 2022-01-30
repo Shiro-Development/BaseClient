@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  gateway:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/shiro
+      - /var/run/docker.sock:/var/run/docker.sock
+  discord-api:
+    image: ghcr.io/germanoeich/nirn-proxy:latest
+    ports:
+      - 0.0.0.0:8867:8080
+      - 0.0.0.0:8868:9000
