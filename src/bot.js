@@ -23,7 +23,7 @@ client.on('ready', async _ => {
 
       const channel = await client.cache.getChannel(shardID, guild.settings.mod_log_channel, m.guild_id)
 
-      const modLogCountCache = await client.redis.get(`${process.env.REDIS_TAG}:${guild.id}:modlogs:count`) || 0
+      const modLogCountCache = await client.redis.get(`${process.env.REDIS_TAG}:guilds:${guild.id}:modlogs:count`) || 0
       const modLogCount = modLogCountCache ? parseInt(modLogCountCache) : await guild.getModLogsCount()
       await client.redis.set(`${process.env.REDIS_TAG}:guilds:${guild.id}:modlogs:count`, modLogCount + 1)
 
