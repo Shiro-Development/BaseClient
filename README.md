@@ -1,5 +1,5 @@
-# Mutes
-Mute service for Shiro Mute Timer handling
+# Base Client
+Base Client for AMQP
 
 ## NOTE
-This will not scale yet. Not that it will need to. It's solely checking the database every second to see if mutes have expired.
+This may be out of date depending on how much time I have. Double check with me before doing anything.
