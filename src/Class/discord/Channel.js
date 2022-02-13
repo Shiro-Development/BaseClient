@@ -50,7 +50,7 @@ class Channel {
     }
     if (content instanceof FormData) {
       headers = { ...headers, ...content.getHeaders() }
-      return axios.post(`${constants.discord.api}/channels/${this.id}/messages`, content.getBuffer(), { headers: headers }).then(({ data }) => {
+      return axios.post(`${constants.discord.api}/channels/${this.id}/messages`, content.getBuffer(), { headers: headers, 'Content-Type': 'application/json' }).then(({ data }) => {
         const msg = new Message(this.client, data)
         return msg
       })
@@ -63,7 +63,7 @@ class Channel {
       })
     }
     headers['Content-Type'] = 'application/json'
-    return axios.post(`${constants.discord.api}/channels/${this.id}/messages`, json, { headers: headers }).then(({ data }) => {
+    return axios.post(`${constants.discord.api}/channels/${this.id}/messages`, json, { headers: headers, 'Content-Type': 'application/json' }).then(({ data }) => {
       const msg = new Message(this.client, data)
       return msg
     })
@@ -98,7 +98,8 @@ class Channel {
     await axios.post(`${constants.discord.api}/channels/${this.id}/messages/bulk-delete`, { messages: messages }, {
       headers: {
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
-        'User-Agent': 'Discord-bot'
+        'User-Agent': 'Discord-bot',
+        'Content-Type': 'application/json'
       }
     })
     return { messages: messages }

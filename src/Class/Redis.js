@@ -12,7 +12,7 @@ class Redis {
    */
   constructor (name, db, config = { host: '', port: 6379, auth: '' }) {
     this.name = name
-    const commandArray = ['get', 'set', 'del', 'ttl']
+    const commandArray = ['get', 'set', 'del', 'ttl', 'scan', 'keys']
     this.connection = redis.createClient({
       db: db,
       port: config.port,
@@ -26,6 +26,18 @@ class Redis {
     commandArray.forEach(command => {
       this[command] = promisify(this.connection[command]).bind(this.connection)
     })
+  }
+
+  async getAllKeys (pattern) {
+    let cursor = '0'
+    const keys = []
+    do {
+      const results = await this.scan(cursor, 'MATCH', pattern)
+      console.log(results)
+      cursor = results[0]
+      keys.push(...results[1])
+    } while (cursor !== '0')
+    return keys
   }
 }
 

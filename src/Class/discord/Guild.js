@@ -139,9 +139,10 @@ class Guild {
     return await axios.post(`${process.env.DB_API_URL}/guild/${this.id || ''}/modlogs`, json,
       {
         headers: {
+          'Content-Type': 'application/json',
           authorization: process.env.DB_API_AUTH
         }
-      }).catch(console.log)
+      }).catch(e => console.log(e.response))
   }
 }
 

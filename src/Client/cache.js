@@ -1,5 +1,5 @@
 const { nanoid } = require('nanoid')
-const { Guild, Channel, User, Role } = require('../Class/discord')
+const { Guild, Channel, User, Role, VoiceState } = require('../Class/discord')
 const Member = require('../Class/discord/Member')
 
 class ClientCache {
@@ -42,7 +42,7 @@ class ClientCache {
         resolve(guild)
       })
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${shardID}`, json, {
+      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
@@ -79,7 +79,7 @@ class ClientCache {
       })
 
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${shardID}`, json, {
+      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
@@ -112,7 +112,7 @@ class ClientCache {
         resolve(user)
       })
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${shardID}`, json, {
+      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
@@ -148,7 +148,43 @@ class ClientCache {
         resolve(member)
       })
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${shardID}`, json, {
+      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
+        replyTo: this.client.cacheReplyName,
+        correlationId: cID
+      })
+    })
+  }
+
+  /**
+   * Fetch a member from a guild in the gateway cache
+   * @param {String} shardID The shard ID the request is being sent from
+   * @param {String} userID The user ID you want the data for
+   * @param {String} guildID The guild ID you want the data for
+   * @returns {Promise<User>} Cached member data from the gateway
+   */
+  getVoiceState (shardID, userID, guildID) {
+    return new Promise((resolve, reject) => {
+      // Stringify content
+      const json = JSON.stringify({ t: 16, d: { id: userID, gid: guildID } })
+      // correlationID
+      const cID = `voicestate-${nanoid()}`
+      // Catch event
+      setTimeout(_ => {
+        if (this.client.eventNames().includes(`cache-${cID}`)) {
+          this.requestTimeout(cID)
+          process.removeAllListeners(`cache-${cID}`)
+          resolve(undefined)
+        }
+      }, 5000)
+      this.client.once(`cache-${cID}`, msg => {
+        msg.guildID = guildID
+        msg.id = userID
+        if (msg.response === 404) resolve(undefined)
+        const voiceState = new VoiceState(this.client, msg)
+        resolve(voiceState)
+      })
+      // Send content to exchange
+      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
@@ -181,7 +217,7 @@ class ClientCache {
         resolve(roles)
       })
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${shardID}`, json, {
+      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
@@ -209,11 +245,57 @@ class ClientCache {
         resolve(stats)
       })
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${shardID}`, json, {
+      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
     })
+  }
+
+  restartGateway () {
+    const json = JSON.stringify({
+      t: 999
+    })
+    this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-0`, json, {
+      replyTo: this.client.cacheReplyName,
+      correlationId: '---'
+    })
+    return true
+  }
+
+  joinVoice (shardID, guildID, channelID) {
+    const json = JSON.stringify({
+      t: 82,
+      d: {
+        guild_id: guildID,
+        channel_id: channelID,
+        self_mute: false,
+        self_deaf: false
+      }
+    })
+    this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
+      replyTo: this.client.cacheReplyName,
+      correlationId: '---'
+    })
+    return true
+  }
+
+  updatePresence (presence = {
+    since: Date.now(),
+    activities: [{
+      created_at: Date.now(),
+      name: 'Example Presence',
+      type: 0
+    }],
+    status: 'online',
+    afk: false
+  }) {
+    const json = JSON.stringify({ t: 81, d: presence })
+    this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-0`, json, {
+      replyTo: this.client.cacheReplyName,
+      correlationId: '---'
+    })
+    return true
   }
 }
 

@@ -4,5 +4,6 @@ module.exports = {
   Channel: require('./Channel'),
   Guild: require('./Guild'),
   Role: require('./Role'),
+  VoiceState: require('./VoiceState'),
   Interactions: require('./Interactions')
 }

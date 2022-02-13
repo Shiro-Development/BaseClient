@@ -5,14 +5,14 @@ class GuildSettings {
     this.client = client
     this.id = id
     this.serverprefix = process.env.PREFIX
-    this.premium = null
-    this.vote_lock_exempt = null
-    this.log_channel = null
-    this.mod_log_channel = null
-    this.log_enabled = null
-    this.mod_log_enabled = null
-    this.welcomer_enabled = null
-    this.mute_role = null
+    this.premium = false
+    this.vote_lock_exempt = false
+    this.log_channel = ''
+    this.mod_log_channel = ''
+    this.log_enabled = ''
+    this.mod_log_enabled = false
+    this.welcomer_enabled = false
+    this.mute_role = false
   }
 
   /**

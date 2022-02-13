@@ -41,7 +41,7 @@ class Mutes {
       case_id: caseID,
       unmute_at: unmuteAt,
       guild_id: this.guildID,
-      perma: permanent
+      permanent: permanent
     })
     const result = await axios.post(`${process.env.DB_API_URL}/guild/${this.guildID}/mutes`, json, {
       headers:

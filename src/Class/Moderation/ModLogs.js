@@ -46,7 +46,7 @@ class ModLogs {
           }
         ]
       }
-    })
+    }).catch(_ => _)
   }
 }
 

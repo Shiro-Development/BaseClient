@@ -4,15 +4,15 @@ class DatabaseUser {
   constructor (client, id) {
     this.client = client
     this.id = id
-    this.avatar_url = null
+    this.avatar_url = 'a123a'
     this.username = null
     this.discriminator = null
-    this.balance = null
-    this.votes = null
-    this.vote_streak = null
-    this.last_voted = null
-    this.boosted = null
-    this.vote_lock_exempt = null
+    this.balance = 0
+    this.votes = 0
+    this.vote_streak = 0
+    this.last_voted = '1990-01-31T00:00:00+00:00'
+    this.boosted = false
+    this.vote_lock_exempt = false
     this.hasVoted = null
   }
 
@@ -22,6 +22,7 @@ class DatabaseUser {
    * @returns {GuildSettings} The guilds settings
    */
   async fetch (options = { ignoreCache: false }) {
+    const voteTimeout = 43200000
     if (options.ignoreCache !== true) {
       const cachedSettings = await this.client.redis.get(`${process.env.REDIS_TAG}:users:${this.id}`)
       if (cachedSettings) {
@@ -30,7 +31,7 @@ class DatabaseUser {
           if (!['id', 'client'].includes(k)) {
             if (k === 'last_voted') {
               const lastVoted = new Date(parsed[k])
-              if ((Date.now() - lastVoted.getTime() <= 43200)) this.hasVoted = true
+              if ((Date.now() - lastVoted.getTime() <= voteTimeout)) this.hasVoted = true
               else this.hasVoted = false
             }
             if (parsed[k]) this[k] = parsed[k]
@@ -45,7 +46,7 @@ class DatabaseUser {
         if (!['id', 'client'].includes(k)) {
           if (k === 'last_voted') {
             const lastVoted = new Date(data[k])
-            if ((Date.now() - lastVoted.getTime() <= 43200)) this.hasVoted = true
+            if ((Date.now() - lastVoted.getTime() <= voteTimeout)) this.hasVoted = true
             else this.hasVoted = false
           }
           if (data[k]) this[k] = data[k]
@@ -64,7 +65,7 @@ class DatabaseUser {
         process.env.DB_API_AUTH,
         'Content-Type': 'application/json'
       }
-    })
+    }).catch(e => console.log(e.response.data))
     await this.client.redis.del(`${process.env.REDIS_TAG}:users:${this.id}`)
     await this.fetch()
     return { ...this, _saveResult: result }
@@ -74,7 +75,9 @@ class DatabaseUser {
     const object = {}
     Object.keys(this).forEach(k => {
       if (!['client'].includes(k) && this[k] !== null) {
-        object[k] = this[k]
+        if (k === 'avatar_url' || this[k] === null || this[k] === undefined || !this[k]) object[k] = 'none'
+        if (k === 'last_voted') return null
+        else object[k] = this[k]
       }
     })
     return JSON.stringify(object)

@@ -16,6 +16,7 @@ class Member {
     this.pending = member?.pending
     this.avatar = member?.avatar
     this.permissions = null
+    this._raw = member
   }
 
   async removeRole (role) {
