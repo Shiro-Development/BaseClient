@@ -17,6 +17,7 @@
     "pretty-bytes": "^5.6.0",
     "pretty-ms": "^7.0.1",
     "redis": "^3.1.2",
+    "shoukaku": "^2.1.4",
     "zlib": "^1.0.5"
   },
   "devDependencies": {
