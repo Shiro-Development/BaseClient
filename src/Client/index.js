@@ -7,6 +7,10 @@ const util = require('../util')
 const database = require('../Class/database')
 const { Interactions } = require('../Class/discord')
 const Redis = require('../Class/Redis')
+const { Influx } = require('../Class/metrics')
+const Reminders = require('../Class/database/Reminders')
+const { Shoukaku } = require('shoukaku')
+const ShoukakuWrapper = require('../util/ShoukakuWrapper')
 
 /**
  * Handles the amqp client connection for the bot
@@ -17,6 +21,22 @@ class Client extends EventEmitter {
     super()
     this.util = util
     this.database = database
+    this.user = {
+      id: process.env.BOT_ID
+    }
+    /* Shoukaku */
+    this.nodes = []
+    process.env.LL_NODES.split(' ').forEach(n => {
+      n = n.split('|')
+      this.nodes.push({
+        name: n[0],
+        url: n[1],
+        secure: n[2] === 'true',
+        auth: n[3]
+      })
+    })
+    this.shoukaku = new Shoukaku(new ShoukakuWrapper(this), this.nodes)
+    this.shoukaku.on('error', console.log)
     /**
      * Redis Handler
      * @type {Redis}
@@ -31,6 +51,8 @@ class Client extends EventEmitter {
       port: process.env.REDIS_PORT,
       auth: process.env.REDIS_AUTH
     })
+    this.influxMetrics = new Influx('Shiro-metrics')
+    this.reminders = new Reminders()
     this.conn = amqp.createConnection({ url: `amqp://${process.env.AMQP_HOST}` })
     this.Interactions = Interactions
     /**
@@ -42,6 +64,7 @@ class Client extends EventEmitter {
 
   async amqpReady (client) {
     client.conn.exchange(process.env.CACHE_EXCHANGE_NAME, { type: 'direct', durable: true, autoDelete: false })
+    client.conn.exchange(process.env.VOICE_EXCHANGE, { type: 'direct', durable: true, autoDelete: false })
 
     // Cache reply queue
     client.conn.queue('', {
@@ -50,16 +73,44 @@ class Client extends EventEmitter {
       autoDelete: true
     }, (queue) => {
       this.cacheReplyName = queue.name
-      this.emit('ready')
+      this.emit('cacheReady')
       // console.log('Cache Reply Queue: ', this.cacheReplyName)
       queue.subscribe(function (message, _, headers) {
         if (headers.type === '404') {
           client.emit(`cache-${headers.correlationId}`, { response: 404, message: 'Not found' })
         } else {
           message = zlib.inflateSync(message.data)
-          message = JSON.parse(message)
+          try { message = JSON.parse(message) } catch { return }
           client.emit(`cache-${headers.correlationId}`, message)
         }
+      })
+    })
+
+    // Event queue
+    client.conn.queue('', {
+      durable: false,
+      exclusive: true,
+      autoDelete: true,
+      arguments: {
+        'x-shiro-name': 'shiro.prod.shards'
+      }
+    }, (queue) => {
+      if (!client.conn.errored) {
+        client.emit('ready')
+      }
+      delete client.conn.errored
+      client.eventQueueName = queue.name
+      queue.bind(process.env.ALL_EVENT_EXCHANGE_NAME, '1000')
+      queue.subscribe(function (message) {
+        client.influxMetrics.incrementMetric('events')
+        message = zlib.inflateSync(message.data)
+        message = JSON.parse(message)
+        client.emit('raw', message)
+        client.emit(message.event.t
+          .split('_')
+          .map(v => `${v.substr(0, 1)}${v.substr(1, v.length).toLowerCase()}`)
+          .join(''),
+        message)
       })
     })
   }
