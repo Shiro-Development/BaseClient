@@ -4,13 +4,9 @@ const EventEmitter = require('events')
 const zlib = require('zlib')
 const ClientCache = require('./cache')
 const util = require('../util')
-const database = require('../Class/database')
 const { Interactions } = require('../Class/discord')
 const Redis = require('../Class/Redis')
 const { Influx } = require('../Class/metrics')
-const Reminders = require('../Class/database/Reminders')
-const { Shoukaku } = require('shoukaku')
-const ShoukakuWrapper = require('../util/ShoukakuWrapper')
 
 /**
  * Handles the amqp client connection for the bot
@@ -20,23 +16,9 @@ class Client extends EventEmitter {
   constructor () {
     super()
     this.util = util
-    this.database = database
     this.user = {
       id: process.env.BOT_ID
     }
-    /* Shoukaku */
-    this.nodes = []
-    process.env.LL_NODES.split(' ').forEach(n => {
-      n = n.split('|')
-      this.nodes.push({
-        name: n[0],
-        url: n[1],
-        secure: n[2] === 'true',
-        auth: n[3]
-      })
-    })
-    this.shoukaku = new Shoukaku(new ShoukakuWrapper(this), this.nodes)
-    this.shoukaku.on('error', console.log)
     /**
      * Redis Handler
      * @type {Redis}
@@ -51,8 +33,7 @@ class Client extends EventEmitter {
       port: process.env.REDIS_PORT,
       auth: process.env.REDIS_AUTH
     })
-    this.influxMetrics = new Influx('Shiro-metrics')
-    this.reminders = new Reminders()
+    this.influxMetrics = new Influx('metrics')
     this.conn = amqp.createConnection({ url: `amqp://${process.env.AMQP_HOST}` })
     this.Interactions = Interactions
     /**
@@ -90,10 +71,7 @@ class Client extends EventEmitter {
     client.conn.queue('', {
       durable: false,
       exclusive: true,
-      autoDelete: true,
-      arguments: {
-        'x-shiro-name': 'shiro.prod.shards'
-      }
+      autoDelete: true
     }, (queue) => {
       if (!client.conn.errored) {
         client.emit('ready')
