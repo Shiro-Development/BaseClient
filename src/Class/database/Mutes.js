@@ -1,4 +1,4 @@
-const { default: axios } = require('axios')
+const { httpRequestHandler } = require('../../util')
 
 class Mutes {
   constructor (client, guildID) {
@@ -8,7 +8,7 @@ class Mutes {
   }
 
   async fetchAll () {
-    const { data } = await axios.get(`${process.env.DB_API_URL}/mutes`, { headers: { authorization: process.env.DB_API_AUTH } })
+    const { data } = await httpRequestHandler.get(`${process.env.DB_API_URL}/mutes`, { headers: { authorization: process.env.DB_API_AUTH } })
     this.mutes = data
     return this
   }
@@ -19,13 +19,13 @@ class Mutes {
    * @returns {GuildSettings} The guilds settings
    */
   async fetch () {
-    const { data } = await axios.get(`${process.env.DB_API_URL}/guild/${this.guildID}/mutes`, { headers: { authorization: process.env.DB_API_AUTH } })
+    const { data } = await httpRequestHandler.get(`${process.env.DB_API_URL}/guild/${this.guildID}/mutes`, { headers: { authorization: process.env.DB_API_AUTH } })
     this.mutes = data
     return this
   }
 
   async remove (caseID) {
-    const result = await axios.delete(`${process.env.DB_API_URL}/guild/${this.guildID}/mutes/${caseID}`, {
+    const result = await httpRequestHandler.delete(`${process.env.DB_API_URL}/guild/${this.guildID}/mutes/${caseID}`, {
       headers:
       {
         authorization: process.env.DB_API_AUTH
@@ -43,7 +43,7 @@ class Mutes {
       guild_id: this.guildID,
       permanent: permanent
     })
-    const result = await axios.post(`${process.env.DB_API_URL}/guild/${this.guildID}/mutes`, json, {
+    const result = await httpRequestHandler.post(`${process.env.DB_API_URL}/guild/${this.guildID}/mutes`, json, {
       headers:
       {
         authorization:

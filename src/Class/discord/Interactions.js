@@ -1,6 +1,5 @@
-const { default: axios } = require('axios')
 const FormData = require('form-data')
-const { constants } = require('../../util')
+const { constants, httpRequestHandler } = require('../../util')
 
 /**
  * Follow up an interaction made in the discord client.
@@ -11,7 +10,7 @@ const { constants } = require('../../util')
  */
 exports.followUp = async (appID, interactionToken, data) => {
   if (data instanceof FormData) {
-    await axios.post(`${constants.discord.interactions}${appID}/${interactionToken}/callback`, data.getBuffer(), {
+    await httpRequestHandler.post(`${constants.discord.interactions}${appID}/${interactionToken}/callback`, data.getBuffer(), {
       headers: {
         ...data.getHeaders(),
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
@@ -23,7 +22,7 @@ exports.followUp = async (appID, interactionToken, data) => {
     }
   }
   const json = JSON.stringify(data)
-  return axios.post(`${constants.discord.interactions}${appID}/${interactionToken}/callback`, json, {
+  return httpRequestHandler.post(`${constants.discord.interactions}${appID}/${interactionToken}/callback`, json, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
@@ -34,7 +33,7 @@ exports.followUp = async (appID, interactionToken, data) => {
 
 exports.followUpDeferred = async (appID, interactionToken, data) => {
   if (data instanceof FormData) {
-    await axios.post(`${constants.discord.webhooks}${appID}/${interactionToken}`, data.getBuffer(), {
+    await httpRequestHandler.post(`${constants.discord.webhooks}${appID}/${interactionToken}`, data.getBuffer(), {
       headers: {
         ...data.getHeaders(),
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
@@ -46,7 +45,7 @@ exports.followUpDeferred = async (appID, interactionToken, data) => {
     }
   }
   const json = JSON.stringify(data)
-  return axios.post(`${constants.discord.webhooks}${appID}/${interactionToken}`, json, {
+  return httpRequestHandler.post(`${constants.discord.webhooks}${appID}/${interactionToken}`, json, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
@@ -57,7 +56,7 @@ exports.followUpDeferred = async (appID, interactionToken, data) => {
 
 exports.edit = async (appID, interactionToken, data, messageID = '@original') => {
   const json = JSON.stringify(data)
-  return axios.patch(`${constants.discord.webhooks}${appID}/${interactionToken}/messages/${messageID}`, json, {
+  return httpRequestHandler.patch(`${constants.discord.webhooks}${appID}/${interactionToken}/messages/${messageID}`, json, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
@@ -67,7 +66,7 @@ exports.edit = async (appID, interactionToken, data, messageID = '@original') =>
 }
 
 exports.delete = async (appID, interactionToken, messageID = '@original') => {
-  return axios.delete(`${constants.discord.webhooks}${appID}/${interactionToken}/messages/${messageID}`, '', {
+  return httpRequestHandler.delete(`${constants.discord.webhooks}${appID}/${interactionToken}/messages/${messageID}`, '', {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bot ${process.env.DISCORD_TOKEN}`,

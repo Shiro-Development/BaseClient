@@ -1,4 +1,4 @@
-const { default: axios } = require('axios')
+const { httpRequestHandler } = require('../../util')
 const { constants } = require('../../util')
 const Member = require('./Member')
 const User = require('./User')
@@ -63,7 +63,7 @@ class Message {
         }
       })
     }
-    return axios.post(`${constants.discord.api}/channels/${this.channelID}/messages`, json, {
+    return httpRequestHandler.post(`${constants.discord.api}/channels/${this.channelID}/messages`, json, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
@@ -83,7 +83,7 @@ class Message {
         content
       })
     }
-    return axios.patch(`${constants.discord.api}/channels/${this.channelID}/messages/${this.id}`, json, {
+    return httpRequestHandler.patch(`${constants.discord.api}/channels/${this.channelID}/messages/${this.id}`, json, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
@@ -93,7 +93,7 @@ class Message {
   }
 
   async delete () {
-    return axios.delete(`${constants.discord.api}/channels/${this.channelID}/messages/${this.id}`, {
+    return httpRequestHandler.delete(`${constants.discord.api}/channels/${this.channelID}/messages/${this.id}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,

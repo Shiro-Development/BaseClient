@@ -1,4 +1,4 @@
-const { default: axios } = require('axios')
+const { httpRequestHandler } = require('../../util')
 
 class LevellingDB {
   constructor (client, userID, guildID) {
@@ -23,17 +23,17 @@ class LevellingDB {
   }
 
   async globalTop10 () {
-    const { data } = await axios.get(`${process.env.DB_API_URL}/levelling/top10`, { headers: { authorization: process.env.DB_API_AUTH } })
+    const { data } = await httpRequestHandler.get(`${process.env.DB_API_URL}/levelling/top10`, { headers: { authorization: process.env.DB_API_AUTH } })
     return data
   }
 
   async guildTop10 () {
-    const { data } = await axios.get(`${process.env.DB_API_URL}/levelling/guild/${this.guildID}/top10`, { headers: { authorization: process.env.DB_API_AUTH } }).catch(_ => { data: [] })
+    const { data } = await httpRequestHandler.get(`${process.env.DB_API_URL}/levelling/guild/${this.guildID}/top10`, { headers: { authorization: process.env.DB_API_AUTH } }).catch(_ => { data: [] })
     return data
   }
 
   async fetchGlobal () {
-    const { data } = await axios.get(`${process.env.DB_API_URL}/levelling/user/${this.userID}`, { headers: { authorization: process.env.DB_API_AUTH } })
+    const { data } = await httpRequestHandler.get(`${process.env.DB_API_URL}/levelling/user/${this.userID}`, { headers: { authorization: process.env.DB_API_AUTH } })
     if (data) {
       const { xp, id, xp_rank: rank, total_users: totalUsers } = data
       this.globalUser = {
@@ -45,7 +45,7 @@ class LevellingDB {
   }
 
   async fetchGuild () {
-    const { data } = await axios.get(`${process.env.DB_API_URL}/levelling/guild/${this.guildID}/user/${this.userID}`, { headers: { authorization: process.env.DB_API_AUTH } })
+    const { data } = await httpRequestHandler.get(`${process.env.DB_API_URL}/levelling/guild/${this.guildID}/user/${this.userID}`, { headers: { authorization: process.env.DB_API_AUTH } })
     if (data) {
       const { xp, guild_id: guildID, id, xp_rank: rank, total_users: totalUsers } = data
       this.guildUser = {
@@ -62,7 +62,7 @@ class LevellingDB {
         id: this.userID,
         xp: this.globalUser.xp
       })
-      await axios.post(`${process.env.DB_API_URL}/users/${this.userID}/xp`, json, {
+      await httpRequestHandler.post(`${process.env.DB_API_URL}/users/${this.userID}/xp`, json, {
         headers:
         {
           authorization:
@@ -78,7 +78,7 @@ class LevellingDB {
         guild_id: this.guildID,
         xp: this.guildUser.xp
       })
-      await axios.post(`${process.env.DB_API_URL}/guild/${this.guildID}/user/${this.userID}/xp`, json, {
+      await httpRequestHandler.post(`${process.env.DB_API_URL}/guild/${this.guildID}/user/${this.userID}/xp`, json, {
         headers:
         {
           authorization:

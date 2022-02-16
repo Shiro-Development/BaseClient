@@ -1,4 +1,4 @@
-const { default: axios } = require('axios')
+const { httpRequestHandler } = require('../../util')
 const { Flags: { UserFlags }, constants: { discord } } = require('../../util')
 const { DatabaseUser } = require('../database')
 const Member = require('./Member')
@@ -30,7 +30,7 @@ class User {
   }
 
   async fetchApplicationRPC () {
-    this.applicationInfo = (await axios.get(`${discord.api}/applications/${this.id}/rpc`).catch(_ => {}))?.data || undefined
+    this.applicationInfo = (await httpRequestHandler.get(`${discord.api}/applications/${this.id}/rpc`).catch(_ => {}))?.data || undefined
     return this
   }
 }

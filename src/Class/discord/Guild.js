@@ -1,5 +1,4 @@
-const { default: axios } = require('axios')
-const { constants } = require('../../util')
+const { constants, httpRequestHandler } = require('../../util')
 const { GuildSettings, Mutes } = require('../database')
 const { ModLogs } = require('../Moderation')
 
@@ -64,7 +63,7 @@ class Guild {
 
   async kick (user, reason) {
     if (!user) return
-    return axios.delete(`${constants.discord.api}/guilds/${this.id}/members/${user}`, {
+    return httpRequestHandler.delete(`${constants.discord.api}/guilds/${this.id}/members/${user}`, {
       headers: {
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
         'User-Agent': 'Discord-bot',
@@ -84,7 +83,7 @@ class Guild {
   async ban (user, reason, options = { delete_message_days: 0 }) {
     if (!user) return
     const json = JSON.stringify(options)
-    return axios.put(`${constants.discord.api}/guilds/${this.id}/bans/${user}`, json, {
+    return httpRequestHandler.put(`${constants.discord.api}/guilds/${this.id}/bans/${user}`, json, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
@@ -96,7 +95,7 @@ class Guild {
 
   async unban (user, reason) {
     if (!user) return
-    return axios.delete(`${constants.discord.api}/guilds/${this.id}/bans/${user}`, {
+    return httpRequestHandler.delete(`${constants.discord.api}/guilds/${this.id}/bans/${user}`, {
       headers: {
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
         'User-Agent': 'Discord-bot',
@@ -106,7 +105,7 @@ class Guild {
   }
 
   async fetchAuditLog (options = { limit: 50, action_type: undefined, user_id: undefined, before: undefined }) {
-    return (await axios.get(`${constants.discord.api}/guilds/${this.id || ''}/audit-logs?${encodeQueryData(options)}`, {
+    return (await httpRequestHandler.get(`${constants.discord.api}/guilds/${this.id || ''}/audit-logs?${encodeQueryData(options)}`, {
       headers: {
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
         'User-Agent': 'Discord-bot'
@@ -115,12 +114,12 @@ class Guild {
   }
 
   async getModLogsCount () {
-    return (await axios.get(`${process.env.DB_API_URL}/guild/${this.id || ''}/modlogs/count`,
+    return (await httpRequestHandler.get(`${process.env.DB_API_URL}/guild/${this.id || ''}/modlogs/count`,
       { headers: { authorization: process.env.DB_API_AUTH } })).data.count
   }
 
   async getModlogs () {
-    return (await axios.get(`${process.env.DB_API_URL}/guild/${this.id || ''}/modlogs`,
+    return (await httpRequestHandler.get(`${process.env.DB_API_URL}/guild/${this.id || ''}/modlogs`,
       { headers: { authorization: process.env.DB_API_AUTH } })).data
   }
 
@@ -136,7 +135,7 @@ class Guild {
       guild_id: this.id,
       ...options
     })
-    return await axios.post(`${process.env.DB_API_URL}/guild/${this.id || ''}/modlogs`, json,
+    return await httpRequestHandler.post(`${process.env.DB_API_URL}/guild/${this.id || ''}/modlogs`, json,
       {
         headers: {
           'Content-Type': 'application/json',

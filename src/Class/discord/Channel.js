@@ -1,6 +1,5 @@
-const { default: axios } = require('axios')
 const FormData = require('form-data')
-const { constants } = require('../../util')
+const { constants, httpRequestHandler } = require('../../util')
 const Message = require('./Message')
 
 /**
@@ -32,7 +31,7 @@ class Channel {
       Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
       'User-Agent': 'Discord-bot'
     }
-    return axios.get(`${constants.discord.api}/channels/${this.id}/messages/${messageID}`, { headers: headers }).then(({ data }) => {
+    return httpRequestHandler.get(`${constants.discord.api}/channels/${this.id}/messages/${messageID}`, { headers: headers }).then(({ data }) => {
       const msg = new Message(this.client, data)
       return msg
     })
@@ -50,7 +49,7 @@ class Channel {
     }
     if (content instanceof FormData) {
       headers = { ...headers, ...content.getHeaders() }
-      return axios.post(`${constants.discord.api}/channels/${this.id}/messages`, content.getBuffer(), { headers: headers, 'Content-Type': 'application/json' }).then(({ data }) => {
+      return httpRequestHandler.post(`${constants.discord.api}/channels/${this.id}/messages`, content.getBuffer(), { headers: headers, 'Content-Type': 'application/json' }).then(({ data }) => {
         const msg = new Message(this.client, data)
         return msg
       })
@@ -63,7 +62,7 @@ class Channel {
       })
     }
     headers['Content-Type'] = 'application/json'
-    return axios.post(`${constants.discord.api}/channels/${this.id}/messages`, json, { headers: headers, 'Content-Type': 'application/json' }).then(({ data }) => {
+    return httpRequestHandler.post(`${constants.discord.api}/channels/${this.id}/messages`, json, { headers: headers, 'Content-Type': 'application/json' }).then(({ data }) => {
       const msg = new Message(this.client, data)
       return msg
     })
@@ -77,7 +76,7 @@ class Channel {
     if (typeof amount !== 'number') throw TypeError('Amount must be a number')
     if (amount < 2 || amount > 100) throw RangeError('Bulk Delete Amount must be between 2-100')
 
-    let messages = (await axios.get(`${constants.discord.api}/channels/${this.id}/messages?limit=${amount}`, {
+    let messages = (await httpRequestHandler.get(`${constants.discord.api}/channels/${this.id}/messages?limit=${amount}`, {
       headers: {
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
         'User-Agent': 'Discord-bot'
@@ -95,7 +94,7 @@ class Channel {
 
     if (messages.length < 2) return { messages: [] }
 
-    await axios.post(`${constants.discord.api}/channels/${this.id}/messages/bulk-delete`, { messages: messages }, {
+    await httpRequestHandler.post(`${constants.discord.api}/channels/${this.id}/messages/bulk-delete`, { messages: messages }, {
       headers: {
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
         'User-Agent': 'Discord-bot',

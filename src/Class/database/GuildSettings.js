@@ -1,4 +1,4 @@
-const { default: axios } = require('axios')
+const { httpRequestHandler } = require('../../util')
 
 class GuildSettings {
   constructor (client, id) {
@@ -33,7 +33,7 @@ class GuildSettings {
         return this
       }
     }
-    const { data } = await axios.get(`${process.env.DB_API_URL}/guild/${this.id}`, { headers: { authorization: process.env.DB_API_AUTH } })
+    const { data } = await httpRequestHandler.get(`${process.env.DB_API_URL}/guild/${this.id}`, { headers: { authorization: process.env.DB_API_AUTH } })
     if (data) {
       Object.keys(data).forEach(k => {
         if (!['id', 'client'].includes(k)) {
@@ -46,7 +46,7 @@ class GuildSettings {
   }
 
   async save () {
-    const result = await axios.post(`${process.env.DB_API_URL}/guild/${this.id}`, this.toJSON(), {
+    const result = await httpRequestHandler.post(`${process.env.DB_API_URL}/guild/${this.id}`, this.toJSON(), {
       headers:
       {
         authorization:

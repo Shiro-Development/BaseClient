@@ -1,4 +1,4 @@
-const { default: axios } = require('axios')
+const { httpRequestHandler } = require('../../util')
 const { constants } = require('../../util')
 const Permissions = require('../../util/Permissions')
 
@@ -20,7 +20,7 @@ class Member {
   }
 
   async removeRole (role) {
-    await axios.delete(`${constants.discord.api}/guilds/${this.guildID}/members/${this.id}/roles/${role}`, {
+    await httpRequestHandler.delete(`${constants.discord.api}/guilds/${this.guildID}/members/${this.id}/roles/${role}`, {
       headers: {
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
         'User-Agent': 'Discord-bot'
@@ -29,7 +29,7 @@ class Member {
   }
 
   async addRole (role) {
-    await axios.put(`${constants.discord.api}/guilds/${this.guildID}/members/${this.id}/roles/${role}`, {}, {
+    await httpRequestHandler.put(`${constants.discord.api}/guilds/${this.guildID}/members/${this.id}/roles/${role}`, {}, {
       headers: {
         Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
         'User-Agent': 'Discord-bot'

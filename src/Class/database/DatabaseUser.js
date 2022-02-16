@@ -1,4 +1,4 @@
-const { default: axios } = require('axios')
+const { httpRequestHandler } = require('../../util')
 
 class DatabaseUser {
   constructor (client, id) {
@@ -40,7 +40,7 @@ class DatabaseUser {
         return this
       }
     }
-    const { data } = await axios.get(`${process.env.DB_API_URL}/users/${this.id}`, { headers: { authorization: process.env.DB_API_AUTH } })
+    const { data } = await httpRequestHandler.get(`${process.env.DB_API_URL}/users/${this.id}`, { headers: { authorization: process.env.DB_API_AUTH } })
     if (data) {
       Object.keys(data).forEach(k => {
         if (!['id', 'client'].includes(k)) {
@@ -58,7 +58,7 @@ class DatabaseUser {
   }
 
   async save () {
-    const result = await axios.post(`${process.env.DB_API_URL}/users/${this.id}`, this.toJSON(), {
+    const result = await httpRequestHandler.post(`${process.env.DB_API_URL}/users/${this.id}`, this.toJSON(), {
       headers:
       {
         authorization:

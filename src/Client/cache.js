@@ -31,9 +31,9 @@ class ClientCache {
       setTimeout(_ => {
         if (process.eventNames().includes(`cache-${cID}`)) {
           this.requestTimeout(cID)
-          process.removeAllListeners(`cache-${cID}`)
           resolve(undefined)
         }
+        process.removeAllListeners(`cache-${cID}`)
       }, 5000)
 
       // Catch event
@@ -67,9 +67,9 @@ class ClientCache {
       setTimeout(_ => {
         if (process.eventNames().includes(`cache-${cID}`)) {
           this.requestTimeout(cID)
-          process.removeAllListeners(`cache-${cID}`)
           resolve(undefined)
         }
+        process.removeAllListeners(`cache-${cID}`)
       }, 5000)
 
       // Catch event
@@ -102,9 +102,9 @@ class ClientCache {
       setTimeout(_ => {
         if (process.eventNames().includes(`cache-${cID}`)) {
           this.requestTimeout(cID)
-          process.removeAllListeners(`cache-${cID}`)
           resolve(undefined)
         }
+        process.removeAllListeners(`cache-${cID}`)
       }, 5000)
       // Catch event
       this.client.once(`cache-${cID}`, msg => {
@@ -136,9 +136,9 @@ class ClientCache {
       setTimeout(_ => {
         if (this.client.eventNames().includes(`cache-${cID}`)) {
           this.requestTimeout(cID)
-          process.removeAllListeners(`cache-${cID}`)
           resolve(undefined)
         }
+        process.removeAllListeners(`cache-${cID}`)
       }, 5000)
       this.client.once(`cache-${cID}`, msg => {
         msg.guildID = guildID
@@ -172,9 +172,9 @@ class ClientCache {
       setTimeout(_ => {
         if (this.client.eventNames().includes(`cache-${cID}`)) {
           this.requestTimeout(cID)
-          process.removeAllListeners(`cache-${cID}`)
           resolve(undefined)
         }
+        process.removeAllListeners(`cache-${cID}`)
       }, 5000)
       this.client.once(`cache-${cID}`, msg => {
         msg.guildID = guildID
@@ -207,9 +207,9 @@ class ClientCache {
       setTimeout(_ => {
         if (process.eventNames().includes(`cache-${cID}`)) {
           this.requestTimeout(cID)
-          process.removeAllListeners(`cache-${cID}`)
           resolve([])
         }
+        process.removeAllListeners(`cache-${cID}`)
       }, 5000)
       // Catch event
       this.client.once(`cache-${cID}`, roles => {
@@ -235,9 +235,9 @@ class ClientCache {
       setTimeout(_ => {
         if (process.eventNames().includes(`cache-${cID}`)) {
           this.requestTimeout(cID)
-          process.removeAllListeners(`cache-${cID}`)
           resolve({})
         }
+        process.removeAllListeners(`cache-${cID}`)
       }, 5000)
 
       // Catch event
