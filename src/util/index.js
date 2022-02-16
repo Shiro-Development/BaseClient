@@ -1,9 +1,7 @@
-const { default: axios } = require('axios')
-const Levelling = require('./Levelling')
-
 module.exports = {
   Flags: require('./Flags'),
   constants: require('./constants'),
+  httpRequestHandler: require('./HttpRequestHandler'),
 
   // Convert snowflake into date
   // Converts discord ID snowflakes into join date
@@ -21,16 +19,5 @@ module.exports = {
       date: joinDate,
       unix: Math.floor(joinDate.getTime() / 1000)
     }
-  },
-
-  fetchShiroAPI: async (endpoint) => {
-    return axios.get(`https://api.dbot.dev/${endpoint}`)
-  },
-
-  downloadImage: async (url) => {
-    return axios.get(url, {
-      responseType: 'arraybuffer'
-    })
-  },
-  Levelling
+  }
 }
