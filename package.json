@@ -8,13 +8,11 @@
     "chalk": "^4.1.2",
     "dotenv": "^10.0.0",
     "form-data": "^4.0.0",
-    "influx": "^5.9.2",
     "nanoid": "^3.2.0",
     "node-fetch": "^2.6.7",
     "parse-duration": "^1.0.2",
     "pretty-bytes": "^5.6.0",
     "pretty-ms": "^7.0.1",
-    "redis": "^3.1.2",
     "zlib": "^1.0.5"
   },
   "devDependencies": {
