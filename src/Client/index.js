@@ -5,7 +5,6 @@ const zlib = require('zlib')
 const ClientCache = require('./cache')
 const util = require('../util')
 const { Interactions } = require('../Class/discord')
-const { Influx } = require('../Class/metrics')
 
 /**
  * Handles the amqp client connection for the bot
@@ -15,10 +14,18 @@ class Client extends EventEmitter {
   /**
    * Client for dispers gateway
    * @param {Object} options Client configuration options
+   * @param {String} options.botToken Bot token of the bot you're handling
+   * @param {?String} options.clientId Client ID of the application. **NOTE**: This is only used for interaction handling as it relies on the client ID not the bot ID.
+   * @param {Number} options.shardId Shard count defined from gateway, this is used to calculate guild shard ID's in some cases. You can update this during runtime and it will work client-wide.
+   * @param {Object} options.amqp AMQP driver configuration
+   * @param {String} options.amqp.host The host of the AMQP server
+   * @param {String} options.amqp.eventExchange The exchange you're using to recieve events from dispers.
+   * @param {String} options.amqp.cacheExchange The exchange you'll be sending cache data requests too.
    */
   constructor (options = {
     botId: '',
     botToken: '',
+    clientId: '',
     shardCount: 0,
     amqp: {
       host: '',
@@ -38,9 +45,13 @@ class Client extends EventEmitter {
      * Cache handler for the bot
      * @type {ClientCache}
      */
-    this.cache = {}
+    this.cache = null
   }
 
+  /**
+   * @protected
+   * @description Ready function for amqp
+   */
   async amqpReady (client) {
     client.conn.exchange(this.options.amqp.cacheExchange, { type: 'direct', durable: true, autoDelete: false })
 
@@ -52,6 +63,7 @@ class Client extends EventEmitter {
     }, (queue) => {
       this.cacheReplyName = queue.name
       this.emit('cacheReady')
+      this.client.cache = new ClientCache(client)
       queue.subscribe(function (message, _, headers) {
         if (headers.type === '404') {
           client.emit(`cache-${headers.correlationId}`, { response: 404, message: 'Not found' })
@@ -99,11 +111,11 @@ client.conn.on('error', function (e) {
   console.log('Error from amqp: \n', e?.stack)
 })
 
+/**
+ * Start client when connection is established
+ */
 client.conn.on('ready', () => {
   client.amqpReady(client)
 })
-// Wait for connection to become established.
-
-client.cache = new ClientCache(client)
 
 module.exports = client

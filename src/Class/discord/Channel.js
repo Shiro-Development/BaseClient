@@ -26,6 +26,11 @@ class Channel {
     this.parentID = channel.parent_id
   }
 
+  /**
+   * Fetch a message from a channel via the discord API
+   * @param {String} messageID ID of the message you would like to fetch
+   * @returns {Message} Message returned from discord.
+   */
   async fetchMessage (messageID) {
     const headers = {
       Authorization: `Bot ${this.client.options.botToken}`,
@@ -69,8 +74,8 @@ class Channel {
   }
 
   /**
-   *
-   * @param {Number} amount Amount of messages to delete.
+   * Bulk delete messages
+   * @param {Number} amount Amount of messages to delete. Must be smaller than or equal to 100.
    */
   async bulkDelete (amount = 50) {
     if (typeof amount !== 'number') throw TypeError('Amount must be a number')

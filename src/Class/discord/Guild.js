@@ -1,5 +1,4 @@
 const { constants, httpRequestHandler } = require('../../util')
-const { ModLogs } = require('../Moderation')
 
 function encodeQueryData (data) {
   const ret = []
@@ -70,11 +69,11 @@ class Guild {
 
   /**
    * Ban a user from the guild
-   * @param {String} user
-   * @param {String|null} reason
-   * @param {Object{}} options
+   * @param {String} user User ID
+   * @param {?String} reason Reason for action
+   * @param {Object} options
    * @param {Number} options.delete_message_days
-   * @returns
+   * @returns Discord API response
    */
   async ban (user, reason, options = { delete_message_days: 0 }) {
     if (!user) return
@@ -89,6 +88,12 @@ class Guild {
     })
   }
 
+  /**
+   * Unban a user from the guild
+   * @param {String} user User ID
+   * @param {?String} reason Reason for action
+   * @returns Discord API response
+   */
   async unban (user, reason) {
     if (!user) return
     return httpRequestHandler.delete(`${constants.discord.api}/guilds/${this.id}/bans/${user}`, {
