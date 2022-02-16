@@ -31,7 +31,7 @@
 
 
     <title>
-      Home
+      Class/SlashCommand.js
     </title>
 
     <!--[if lt IE 9]>
@@ -97,25 +97,68 @@
 
     <div id="main" class="main-content">
       
+      <h1 id='page-title' class="page-title">
+        Class/SlashCommand.js
+      </h1>
+      
 
       
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>module.exports = class SlashCommand {
+  constructor (client) {
+    this.client = client
+    this.category = null
+    /* Not implemented */
+    this.guildLocked = false
+    this.guildLockedIDs = []
+  }
 
+  /**
+   * @returns Command information
+   * @example
+   *  get info () {
+   *    return {
+   *      name: 'example',
+   *      description: 'example description',
+   *      aliases: [],
+   *      syntax: []
+   *    }
+   *  }
+   */
+  get info () {
+    return {
+      name: 'example',
+      description: 'example description',
+      aliases: [],
+      syntax: []
+    }
+  }
 
+  /**
+   * Sets the category of the command
+   * @param {*} category Set command category
+   */
+  setCategory (category) {
+    this.category = category
+  }
 
-
-
-
-
-
-
-    
-
-
-
+  /**
+   * The function to run upon the command being executed
+   * @param {Message} msg Message data
+   * @param {Object[]} args Command Arguments
+   */
+  async run (msg, args) {
+    throw Error('No command function given')
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

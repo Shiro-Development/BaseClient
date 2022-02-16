@@ -1,0 +1,2482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Adding favicon -->
+    
+
+    <!-- Adding meta -->
+    
+
+    <!-- Adding external script-->
+    
+
+    <!-- Adding external style-->
+    
+
+    <!-- Adding scripts-->
+    
+
+    <!-- Adding style-->
+    
+
+    <!-- Adding overlay script-->
+    
+
+    <!-- Adding overlay style-->
+    
+
+
+    <title>
+      Permissions
+    </title>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/third-party/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/third-party/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/reset.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-base.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-dark.css">
+    
+    <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="display:none">
+    <defs>
+        <symbol id="copy-icon" viewbox="0 0 488.3 488.3">
+            <g>
+                <path
+                    d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z" />
+                <path
+                    d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z" />
+            </g>
+        </symbol>
+        <symbol id='search-icon' viewBox="0 0 512 512">
+            <g>
+                <g>
+                    <path
+                        d="M225.474,0C101.151,0,0,101.151,0,225.474c0,124.33,101.151,225.474,225.474,225.474    c124.33,0,225.474-101.144,225.474-225.474C450.948,101.151,349.804,0,225.474,0z M225.474,409.323    c-101.373,0-183.848-82.475-183.848-183.848S124.101,41.626,225.474,41.626s183.848,82.475,183.848,183.848    S326.847,409.323,225.474,409.323z" />
+                </g>
+            </g>
+            <g>
+                <g>
+                    <path
+                        d="M505.902,476.472L386.574,357.144c-8.131-8.131-21.299-8.131-29.43,0c-8.131,8.124-8.131,21.306,0,29.43l119.328,119.328    c4.065,4.065,9.387,6.098,14.715,6.098c5.321,0,10.649-2.033,14.715-6.098C514.033,497.778,514.033,484.596,505.902,476.472z" />
+                </g>
+            </g>
+        </symbol>
+        <symbol id="down-icon" viewBox="0 0 16 16">
+            <path 
+                fill-rule="evenodd" 
+                clip-rule="evenodd" 
+                d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"
+            >
+            </path>
+        </symbol>
+    </defs>
+</svg>
+  </head>
+
+  <body>
+
+    <nav class="navbar" id="navbar">
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="1321166" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=3381522><div class="accordion-heading child"><a href="BitField.html">BitField</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="BitField.html#.resolve">resolve</a></li><li data-type='method'><a href="BitField.html#add">add</a></li><li data-type='method'><a href="BitField.html#any">any</a></li><li data-type='method'><a href="BitField.html#equals">equals</a></li><li data-type='method'><a href="BitField.html#freeze">freeze</a></li><li data-type='method'><a href="BitField.html#has">has</a></li><li data-type='method'><a href="BitField.html#missing">missing</a></li><li data-type='method'><a href="BitField.html#remove">remove</a></li><li data-type='method'><a href="BitField.html#serialize">serialize</a></li><li data-type='method'><a href="BitField.html#toArray">toArray</a></li></ul></li><li class="accordion collapsed child" id=1423482><div class="accordion-heading child"><a href="Channel.html">Channel</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Channel.html#bulkDelete">bulkDelete</a></li><li data-type='method'><a href="Channel.html#fetchMessage">fetchMessage</a></li><li data-type='method'><a href="Channel.html#send">send</a></li></ul></li><li class="accordion collapsed child" id=5274895><div class="accordion-heading child"><a href="Client.html">Client</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Client.html#amqpReady">amqpReady</a></li></ul></li><li class="accordion collapsed child" id=6443350><div class="accordion-heading child"><a href="ClientCache.html">ClientCache</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="ClientCache.html#getChannel">getChannel</a></li><li data-type='method'><a href="ClientCache.html#getGuild">getGuild</a></li><li data-type='method'><a href="ClientCache.html#getGuildRoles">getGuildRoles</a></li><li data-type='method'><a href="ClientCache.html#getMember">getMember</a></li><li data-type='method'><a href="ClientCache.html#getUser">getUser</a></li><li data-type='method'><a href="ClientCache.html#getVoiceState">getVoiceState</a></li></ul></li><li class="accordion collapsed child" id=9430652><div class="accordion-heading child"><a href="Command.html">Command</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Command.html#run">run</a></li><li data-type='method'><a href="Command.html#setCategory">setCategory</a></li></ul></li><li class="accordion collapsed child" id=6298179><div class="accordion-heading child"><a href="DiscordEvent.html">DiscordEvent</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="DiscordEvent.html#handle">handle</a></li></ul></li><li class="accordion collapsed child" id=9222757><div class="accordion-heading child"><a href="Guild.html">Guild</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Guild.html#ban">ban</a></li></ul></li><li class="accordion-list" id=""><a href="Message.html">Message</a></li><li class="accordion collapsed child" id=8885494><div class="accordion-heading child"><a href="Permissions.html">Permissions</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Permissions.html#add">add</a></li><li data-type='method'><a href="Permissions.html#any">any</a></li><li data-type='method'><a href="Permissions.html#equals">equals</a></li><li data-type='method'><a href="Permissions.html#freeze">freeze</a></li><li data-type='method'><a href="Permissions.html#has">has</a></li><li data-type='method'><a href="Permissions.html#missing">missing</a></li><li data-type='method'><a href="Permissions.html#remove">remove</a></li><li data-type='method'><a href="Permissions.html#serialize">serialize</a></li><li data-type='method'><a href="Permissions.html#toArray">toArray</a></li></ul></li><li class="accordion-list" id=""><a href="User.html">User</a></li></ul> </div><div class="accordion collapsed" id="6610277" > <h3 class="accordion-heading">Global<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="global.html#BitFieldResolvable">BitFieldResolvable</a></li><li class="accordion-list" id=""><a href="global.html#PermissionResolvable">PermissionResolvable</a></li></ul> </div>
+      
+
+    </nav>
+    <div class="navbar-ham" id="navbar-ham">
+      <div>
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+      </div>
+    </div>
+
+    <div id="main" class="main-content">
+      
+      <h1 id='page-title' class="page-title">
+        Permissions
+      </h1>
+      
+
+      
+
+
+
+
+<section>
+
+
+<header>
+    
+        
+        <h2>
+        
+        Permissions
+        
+        </h2>
+        
+        
+            <div class="class-description"><p>Data structure that makes it easy to interact with a permission bitfield. All GuildMembers have a set of
+permissions in their guild, and each channel in the guild may also have PermissionOverwrites for the member
+that override their default permissions.</p></div>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+        <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="Permissions">
+        <a href="#Permissions">#</a>
+        <span class="type-signature"></span>new Permissions<span class="signature">()</span><span class="type-signature"></span>
+    </h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_Permissions.js.html">util/Permissions.js</a>, <a href="util_Permissions.js.html#line9">line 9</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="BitField.html">BitField</a></li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".ALL">
+    <a href="#.ALL">#</a>
+    <span class="type-signature">(static) </span>ALL<span class="type-signature"> :bigint</span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>Bitfield representing every permission combined</p>
+</div>
+
+
+
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
+<span class="param-type">bigint</span>
+
+
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_Permissions.js.html">util/Permissions.js</a>, <a href="util_Permissions.js.html#line151">line 151</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".DEFAULT">
+    <a href="#.DEFAULT">#</a>
+    <span class="type-signature">(static) </span>DEFAULT<span class="type-signature"> :bigint</span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>Bitfield representing the default permissions for users</p>
+</div>
+
+
+
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
+<span class="param-type">bigint</span>
+
+
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_Permissions.js.html">util/Permissions.js</a>, <a href="util_Permissions.js.html#line157">line 157</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".FLAGS">
+    <a href="#.FLAGS">#</a>
+    <span class="type-signature">(static) </span>FLAGS<span class="type-signature"> :Object.&lt;string, bigint></span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>Numeric permission flags. All available properties:</p>
+<ul>
+<li><code>CREATE_INSTANT_INVITE</code> (create invitations to the guild)</li>
+<li><code>KICK_MEMBERS</code></li>
+<li><code>BAN_MEMBERS</code></li>
+<li><code>ADMINISTRATOR</code> (implicitly has <em>all</em> permissions, and bypasses all channel overwrites)</li>
+<li><code>MANAGE_CHANNELS</code> (edit and reorder channels)</li>
+<li><code>MANAGE_GUILD</code> (edit the guild information, region, etc.)</li>
+<li><code>ADD_REACTIONS</code> (add new reactions to messages)</li>
+<li><code>VIEW_AUDIT_LOG</code></li>
+<li><code>PRIORITY_SPEAKER</code></li>
+<li><code>STREAM</code></li>
+<li><code>VIEW_CHANNEL</code></li>
+<li><code>SEND_MESSAGES</code></li>
+<li><code>SEND_TTS_MESSAGES</code></li>
+<li><code>MANAGE_MESSAGES</code> (delete messages and reactions)</li>
+<li><code>EMBED_LINKS</code> (links posted will have a preview embedded)</li>
+<li><code>ATTACH_FILES</code></li>
+<li><code>READ_MESSAGE_HISTORY</code> (view messages that were posted prior to opening Discord)</li>
+<li><code>MENTION_EVERYONE</code></li>
+<li><code>USE_EXTERNAL_EMOJIS</code> (use emojis from different guilds)</li>
+<li><code>VIEW_GUILD_INSIGHTS</code></li>
+<li><code>CONNECT</code> (connect to a voice channel)</li>
+<li><code>SPEAK</code> (speak in a voice channel)</li>
+<li><code>MUTE_MEMBERS</code> (mute members across all voice channels)</li>
+<li><code>DEAFEN_MEMBERS</code> (deafen members across all voice channels)</li>
+<li><code>MOVE_MEMBERS</code> (move members between voice channels)</li>
+<li><code>USE_VAD</code> (use voice activity detection)</li>
+<li><code>CHANGE_NICKNAME</code></li>
+<li><code>MANAGE_NICKNAMES</code> (change other members' nicknames)</li>
+<li><code>MANAGE_ROLES</code></li>
+<li><code>MANAGE_WEBHOOKS</code></li>
+<li><code>MANAGE_EMOJIS_AND_STICKERS</code></li>
+<li><code>USE_APPLICATION_COMMANDS</code></li>
+<li><code>REQUEST_TO_SPEAK</code></li>
+<li><code>MANAGE_THREADS</code></li>
+<li><code>USE_PUBLIC_THREADS</code> (deprecated)</li>
+<li><code>CREATE_PUBLIC_THREADS</code></li>
+<li><code>USE_PRIVATE_THREADS</code> (deprecated)</li>
+<li><code>CREATE_PRIVATE_THREADS</code></li>
+<li><code>USE_EXTERNAL_STICKERS</code> (use stickers from different guilds)</li>
+<li><code>SEND_MESSAGES_IN_THREADS</code></li>
+<li><code>START_EMBEDDED_ACTIVITIES</code></li>
+</ul>
+</div>
+
+
+
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
+<span class="param-type">Object.&lt;string, bigint></span>
+
+
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_Permissions.js.html">util/Permissions.js</a>, <a href="util_Permissions.js.html#line102">line 102</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-see">See:</dt>
+            <dd class="tag-see">
+                <ul>
+                    <li><a href="https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags">https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags</a></li>
+                </ul>
+            </dd>
+        </div>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".STAGE_MODERATOR">
+    <a href="#.STAGE_MODERATOR">#</a>
+    <span class="type-signature">(static) </span>STAGE_MODERATOR<span class="type-signature"> :bigint</span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>Bitfield representing the permissions required for moderators of stage channels</p>
+</div>
+
+
+
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
+<span class="param-type">bigint</span>
+
+
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_Permissions.js.html">util/Permissions.js</a>, <a href="util_Permissions.js.html#line163">line 163</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="bitfield">
+    <a href="#bitfield">#</a>
+    <span class="type-signature"></span>bitfield<span class="type-signature"> :bigint</span>
+</h4>
+
+
+
+
+<div class="description">
+    <p>Bitfield of the packed bits</p>
+</div>
+
+
+
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
+<span class="param-type">bigint</span>
+
+
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BitField.html#bitfield">BitField#bitfield</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_Permissions.js.html">util/Permissions.js</a>, <a href="util_Permissions.js.html#line10">line 10</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="add">
+        <a href="#add">#</a>
+        <span class="type-signature"></span>add<span class="signature">(&hellip;bits<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="BitField.html">BitField</a>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Adds bits to these ones.</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>bits</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#BitFieldResolvable">BitFieldResolvable</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Bits to add</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="inherited-from">Inherited From:</dt>
+            <dd class="inherited-from"><ul class="dummy"><li>
+                <a href="BitField.html#add">BitField#add</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_BitField.js.html">util/BitField.js</a>, <a href="util_BitField.js.html#line67">line 67</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    <p>These bits or new BitField if the instance is frozen.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="BitField.html">BitField</a></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="any">
+        <a href="#any">#</a>
+        <span class="type-signature"></span>any<span class="signature">(permission, checkAdmin<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {boolean}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Checks whether the bitfield has a permission, or any of multiple permissions.</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>permission</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#PermissionResolvable">PermissionResolvable</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Permission(s) to check for</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>checkAdmin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>Whether to allow the administrator permission to override</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BitField.html#any">BitField#any</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_Permissions.js.html">util/Permissions.js</a>, <a href="util_Permissions.js.html#line41">line 41</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="equals">
+        <a href="#equals">#</a>
+        <span class="type-signature"></span>equals<span class="signature">(bit)</span><span class="type-signature"> &rarr; {boolean}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Checks if this bitfield equals another</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>bit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#BitFieldResolvable">BitFieldResolvable</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Bit(s) to check for</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="inherited-from">Inherited From:</dt>
+            <dd class="inherited-from"><ul class="dummy"><li>
+                <a href="BitField.html#equals">BitField#equals</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_BitField.js.html">util/BitField.js</a>, <a href="util_BitField.js.html#line30">line 30</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="freeze">
+        <a href="#freeze">#</a>
+        <span class="type-signature"></span>freeze<span class="signature">()</span><span class="type-signature"> &rarr; {Readonly.&lt;<a href="BitField.html">BitField</a>>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Freezes these bits, making them immutable.</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="inherited-from">Inherited From:</dt>
+            <dd class="inherited-from"><ul class="dummy"><li>
+                <a href="BitField.html#freeze">BitField#freeze</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_BitField.js.html">util/BitField.js</a>, <a href="util_BitField.js.html#line58">line 58</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Readonly.&lt;<a href="BitField.html">BitField</a>></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="has">
+        <a href="#has">#</a>
+        <span class="type-signature"></span>has<span class="signature">(permission, checkAdmin<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {boolean}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Checks whether the bitfield has a permission, or multiple permissions.</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>permission</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#PermissionResolvable">PermissionResolvable</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Permission(s) to check for</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>checkAdmin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>Whether to allow the administrator permission to override</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BitField.html#has">BitField#has</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_Permissions.js.html">util/Permissions.js</a>, <a href="util_Permissions.js.html#line51">line 51</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="missing">
+        <a href="#missing">#</a>
+        <span class="type-signature"></span>missing<span class="signature">(bits, checkAdmin<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Gets all given bits that are missing from the bitfield.</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>bits</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#BitFieldResolvable">BitFieldResolvable</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Bit(s) to check for</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>checkAdmin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last"><p>Whether to allow the administrator permission to override</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-overrides">Overrides:</dt>
+            <dd class="tag-overrides"><ul class="dummy"><li>
+                <a href="BitField.html#missing">BitField#missing</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_Permissions.js.html">util/Permissions.js</a>, <a href="util_Permissions.js.html#line31">line 31</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="remove">
+        <a href="#remove">#</a>
+        <span class="type-signature"></span>remove<span class="signature">(&hellip;bits<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="BitField.html">BitField</a>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Removes bits from these.</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>bits</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#BitFieldResolvable">BitFieldResolvable</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Bits to remove</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="inherited-from">Inherited From:</dt>
+            <dd class="inherited-from"><ul class="dummy"><li>
+                <a href="BitField.html#remove">BitField#remove</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_BitField.js.html">util/BitField.js</a>, <a href="util_BitField.js.html#line82">line 82</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    <p>These bits or new BitField if the instance is frozen.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="BitField.html">BitField</a></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="serialize">
+        <a href="#serialize">#</a>
+        <span class="type-signature"></span>serialize<span class="signature">(&hellip;hasParams)</span><span class="type-signature"> &rarr; {Object}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Gets an object mapping field names to a boolean indicating whether the
+bit is available.</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>hasParams</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Additional parameters for the has method, if any</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="inherited-from">Inherited From:</dt>
+            <dd class="inherited-from"><ul class="dummy"><li>
+                <a href="BitField.html#serialize">BitField#serialize</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_BitField.js.html">util/BitField.js</a>, <a href="util_BitField.js.html#line98">line 98</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="toArray">
+        <a href="#toArray">#</a>
+        <span class="type-signature"></span>toArray<span class="signature">(&hellip;hasParams)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span>
+    </h4>
+
+    
+
+
+
+    <div class="description">
+        <p>Gets an Array of bitfield names based on the bits available.</p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>hasParams</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Additional parameters for the has method, if any</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="inherited-from">Inherited From:</dt>
+            <dd class="inherited-from"><ul class="dummy"><li>
+                <a href="BitField.html#toArray">BitField#toArray</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="util_BitField.js.html">util/BitField.js</a>, <a href="util_BitField.js.html#line109">line 109</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+            
+    </div>
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    </div>
+
+    <footer class="footer" id="footer">
+      
+    </footer>
+
+    <script src="scripts/third-party/prettify.js"></script>
+    <script src="scripts/third-party/lang-css.js"></script>
+    <script type="text/javascript" src="scripts/misc.js"></script>
+
+    <script>prettyPrint();</script>
+    <script src="scripts/linenumber.js"></script>
+    <script src="scripts/fix-code-block.js"></script>
+    <script src="scripts/fix-navbar.js"></script>
+    
+      <script src="scripts/search.js"></script>
+      <script src="scripts/third-party/fuse.js"></script>
+      <script>
+        var list = [{"title":"BitField","link":"<a href=\"BitField.html\">BitField</a>"},{"title":"BitField.resolve","link":"<a href=\"BitField.html#.resolve\">BitField.resolve &rtrif; undefined</a>"},{"title":"BitField#add","link":"<a href=\"BitField.html#add\">BitField &rtrif; add</a>"},{"title":"BitField#any","link":"<a href=\"BitField.html#any\">BitField &rtrif; any</a>"},{"title":"BitField#equals","link":"<a href=\"BitField.html#equals\">BitField &rtrif; equals</a>"},{"title":"BitField#freeze","link":"<a href=\"BitField.html#freeze\">BitField &rtrif; freeze</a>"},{"title":"BitField#has","link":"<a href=\"BitField.html#has\">BitField &rtrif; has</a>"},{"title":"BitField#missing","link":"<a href=\"BitField.html#missing\">BitField &rtrif; missing</a>"},{"title":"BitField#remove","link":"<a href=\"BitField.html#remove\">BitField &rtrif; remove</a>"},{"title":"BitField#serialize","link":"<a href=\"BitField.html#serialize\">BitField &rtrif; serialize</a>"},{"title":"BitField#toArray","link":"<a href=\"BitField.html#toArray\">BitField &rtrif; toArray</a>"},{"title":"Channel","link":"<a href=\"Channel.html\">Channel</a>"},{"title":"Channel#bulkDelete","link":"<a href=\"Channel.html#bulkDelete\">Channel &rtrif; bulkDelete</a>"},{"title":"Channel#fetchMessage","link":"<a href=\"Channel.html#fetchMessage\">Channel &rtrif; fetchMessage</a>"},{"title":"Channel#send","link":"<a href=\"Channel.html#send\">Channel &rtrif; send</a>"},{"title":"Client","link":"<a href=\"Client.html\">Client</a>"},{"title":"Client#amqpReady","link":"<a href=\"Client.html#amqpReady\">Client &rtrif; amqpReady</a>"},{"title":"ClientCache","link":"<a href=\"ClientCache.html\">ClientCache</a>"},{"title":"ClientCache#getChannel","link":"<a href=\"ClientCache.html#getChannel\">ClientCache &rtrif; getChannel</a>"},{"title":"ClientCache#getGuild","link":"<a href=\"ClientCache.html#getGuild\">ClientCache &rtrif; getGuild</a>"},{"title":"ClientCache#getGuildRoles","link":"<a href=\"ClientCache.html#getGuildRoles\">ClientCache &rtrif; getGuildRoles</a>"},{"title":"ClientCache#getMember","link":"<a href=\"ClientCache.html#getMember\">ClientCache &rtrif; getMember</a>"},{"title":"ClientCache#getUser","link":"<a href=\"ClientCache.html#getUser\">ClientCache &rtrif; getUser</a>"},{"title":"ClientCache#getVoiceState","link":"<a href=\"ClientCache.html#getVoiceState\">ClientCache &rtrif; getVoiceState</a>"},{"title":"Command","link":"<a href=\"Command.html\">Command</a>"},{"title":"Command#run","link":"<a href=\"Command.html#run\">Command &rtrif; run</a>"},{"title":"Command#setCategory","link":"<a href=\"Command.html#setCategory\">Command &rtrif; setCategory</a>"},{"title":"DiscordEvent","link":"<a href=\"DiscordEvent.html\">DiscordEvent</a>"},{"title":"DiscordEvent#handle","link":"<a href=\"DiscordEvent.html#handle\">DiscordEvent &rtrif; handle</a>"},{"title":"Guild","link":"<a href=\"Guild.html\">Guild</a>"},{"title":"Guild#ban","link":"<a href=\"Guild.html#ban\">Guild &rtrif; ban</a>"},{"title":"Message","link":"<a href=\"Message.html\">Message</a>"},{"title":"Permissions","link":"<a href=\"Permissions.html\">Permissions</a>"},{"title":"Permissions#add","link":"<a href=\"Permissions.html#add\">Permissions &rtrif; add</a>"},{"title":"Permissions#any","link":"<a href=\"Permissions.html#any\">Permissions &rtrif; any</a>"},{"title":"Permissions#equals","link":"<a href=\"Permissions.html#equals\">Permissions &rtrif; equals</a>"},{"title":"Permissions#freeze","link":"<a href=\"Permissions.html#freeze\">Permissions &rtrif; freeze</a>"},{"title":"Permissions#has","link":"<a href=\"Permissions.html#has\">Permissions &rtrif; has</a>"},{"title":"Permissions#missing","link":"<a href=\"Permissions.html#missing\">Permissions &rtrif; missing</a>"},{"title":"Permissions#remove","link":"<a href=\"Permissions.html#remove\">Permissions &rtrif; remove</a>"},{"title":"Permissions#serialize","link":"<a href=\"Permissions.html#serialize\">Permissions &rtrif; serialize</a>"},{"title":"Permissions#toArray","link":"<a href=\"Permissions.html#toArray\">Permissions &rtrif; toArray</a>"},{"title":"User","link":"<a href=\"User.html\">User</a>"},{"title":"BitFieldResolvable","link":"<a href=\"global.html#BitFieldResolvable\">BitFieldResolvable</a>"},{"title":"PermissionResolvable","link":"<a href=\"global.html#PermissionResolvable\">PermissionResolvable</a>"}];
+        var options = 
+          setupSearch(list, options)
+      </script>
+    
+
+    
+
+    
+
+    
+
+    
+
+
+  </body>
+
+</html>
