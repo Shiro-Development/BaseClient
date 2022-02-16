@@ -66,7 +66,7 @@ class Message {
     return httpRequestHandler.post(`${constants.discord.api}/channels/${this.channelID}/messages`, json, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+        Authorization: `Bot ${this.client.options.botToken}`,
         'User-Agent': 'Discord-bot'
       }
     }).then(({ data }) => {
@@ -86,7 +86,7 @@ class Message {
     return httpRequestHandler.patch(`${constants.discord.api}/channels/${this.channelID}/messages/${this.id}`, json, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+        Authorization: `Bot ${this.client.options.botToken}`,
         'User-Agent': 'Discord-bot'
       }
     })
@@ -96,7 +96,7 @@ class Message {
     return httpRequestHandler.delete(`${constants.discord.api}/channels/${this.channelID}/messages/${this.id}`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+        Authorization: `Bot ${this.client.options.botToken}`,
         'User-Agent': 'Discord-bot'
       }
     })

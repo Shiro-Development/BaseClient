@@ -1,5 +1,4 @@
 const { constants, httpRequestHandler } = require('../../util')
-const { GuildSettings, Mutes } = require('../database')
 const { ModLogs } = require('../Moderation')
 
 function encodeQueryData (data) {
@@ -56,16 +55,13 @@ class Guild {
     this.emojis = guild.emojis
     this.channels = guild.channels
     this.threads = guild.threads
-    this.settings = new GuildSettings(this.client, guild.id)
-    this.modlogs = new ModLogs(this.client, this)
-    this.mutes = new Mutes(this.client, guild.id)
   }
 
   async kick (user, reason) {
     if (!user) return
     return httpRequestHandler.delete(`${constants.discord.api}/guilds/${this.id}/members/${user}`, {
       headers: {
-        Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+        Authorization: `Bot ${this.client.options.botToken}`,
         'User-Agent': 'Discord-bot',
         'X-Audit-Log-Reason': reason || ''
       }
@@ -86,7 +82,7 @@ class Guild {
     return httpRequestHandler.put(`${constants.discord.api}/guilds/${this.id}/bans/${user}`, json, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+        Authorization: `Bot ${this.client.options.botToken}`,
         'User-Agent': 'Discord-bot',
         'X-Audit-Log-Reason': reason || ''
       }
@@ -97,7 +93,7 @@ class Guild {
     if (!user) return
     return httpRequestHandler.delete(`${constants.discord.api}/guilds/${this.id}/bans/${user}`, {
       headers: {
-        Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+        Authorization: `Bot ${this.client.options.botToken}`,
         'User-Agent': 'Discord-bot',
         'X-Audit-Log-Reason': reason || ''
       }
@@ -107,41 +103,10 @@ class Guild {
   async fetchAuditLog (options = { limit: 50, action_type: undefined, user_id: undefined, before: undefined }) {
     return (await httpRequestHandler.get(`${constants.discord.api}/guilds/${this.id || ''}/audit-logs?${encodeQueryData(options)}`, {
       headers: {
-        Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+        Authorization: `Bot ${this.client.options.botToken}`,
         'User-Agent': 'Discord-bot'
       }
     }).catch(_ => _)).data
-  }
-
-  async getModLogsCount () {
-    return (await httpRequestHandler.get(`${process.env.DB_API_URL}/guild/${this.id || ''}/modlogs/count`,
-      { headers: { authorization: process.env.DB_API_AUTH } })).data.count
-  }
-
-  async getModlogs () {
-    return (await httpRequestHandler.get(`${process.env.DB_API_URL}/guild/${this.id || ''}/modlogs`,
-      { headers: { authorization: process.env.DB_API_AUTH } })).data
-  }
-
-  async setModlog (options = {
-    case_id: undefined,
-    message_id: '',
-    reason: '',
-    moderator: '',
-    target: '',
-    action: ''
-  }) {
-    const json = JSON.stringify({
-      guild_id: this.id,
-      ...options
-    })
-    return await httpRequestHandler.post(`${process.env.DB_API_URL}/guild/${this.id || ''}/modlogs`, json,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: process.env.DB_API_AUTH
-        }
-      }).catch(e => console.log(e.response))
   }
 }
 

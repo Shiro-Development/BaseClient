@@ -1,6 +1,5 @@
 const { httpRequestHandler } = require('../../util')
 const { Flags: { UserFlags }, constants: { discord } } = require('../../util')
-const { DatabaseUser } = require('../database')
 const Member = require('./Member')
 
 /**
@@ -25,7 +24,6 @@ class User {
     this.avatar = avatar
     this.flags = new UserFlags(publicFlags)
     this.member = new Member(client, member)
-    this.databaseUser = new DatabaseUser(client, this.id)
     this.applicationInfo = undefined
   }
 

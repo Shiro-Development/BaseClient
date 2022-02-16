@@ -28,7 +28,7 @@ class Channel {
 
   async fetchMessage (messageID) {
     const headers = {
-      Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+      Authorization: `Bot ${this.client.options.botToken}`,
       'User-Agent': 'Discord-bot'
     }
     return httpRequestHandler.get(`${constants.discord.api}/channels/${this.id}/messages/${messageID}`, { headers: headers }).then(({ data }) => {
@@ -44,7 +44,7 @@ class Channel {
   async send (content) {
     let json
     let headers = {
-      Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+      Authorization: `Bot ${this.client.options.botToken}`,
       'User-Agent': 'Discord-bot'
     }
     if (content instanceof FormData) {
@@ -78,7 +78,7 @@ class Channel {
 
     let messages = (await httpRequestHandler.get(`${constants.discord.api}/channels/${this.id}/messages?limit=${amount}`, {
       headers: {
-        Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+        Authorization: `Bot ${this.client.options.botToken}`,
         'User-Agent': 'Discord-bot'
       }
     })).data
@@ -96,7 +96,7 @@ class Channel {
 
     await httpRequestHandler.post(`${constants.discord.api}/channels/${this.id}/messages/bulk-delete`, { messages: messages }, {
       headers: {
-        Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+        Authorization: `Bot ${this.client.options.botToken}`,
         'User-Agent': 'Discord-bot',
         'Content-Type': 'application/json'
       }

@@ -1,76 +1,17 @@
 
 // Discord API constants
-const discordAPIVersion = 'v8'
+const discordAPIVersion = 'v9'
 
 exports.discord = {
   interactionTypes: {
     APPLICATION_COMMAND: 2
   },
-  api: `${process.env.DISCORD_API_HOST}/api/${discordAPIVersion}`,
-  gateway: `${process.env.DISCORD_API_HOST}/api/${discordAPIVersion}/gateway/bot`,
-  channels: `${process.env.DISCORD_API_HOST}/api/${discordAPIVersion}/channels/`,
-  interactions: `${process.env.DISCORD_API_HOST}/api/${discordAPIVersion}/interactions/`,
-  webhooks: `${process.env.DISCORD_API_HOST}/api/${discordAPIVersion}/webhooks/`,
-  cdn: 'https://cdn.discordapp.com/',
-  globalCommands: `${process.env.DISCORD_API_HOST}/api/${discordAPIVersion}/applications/${process.env.BOT_ID}/commands`,
-  privateCommands: `${process.env.DISCORD_API_HOST}/api/${discordAPIVersion}/applications/${process.env.BOT_ID}/guilds/817548193410580511/commands`
-}
-
-// shiro links
-exports.shiro = {
-  invite: 'https://discord.com/oauth2/authorize?client_id=461521980492087297&permissions=1476783326&redirect_uri=https%3A%2F%2Fshirobot.org%2Fauthorize&authorize&response_type=code&scope=bot+identify+guilds+applications.commands',
-  website: 'https://shirobot.org/',
-  emoji_links: {
-    cross: 'https://cdn.discordapp.com/emojis/926180096006557776.png?size=128',
-    blobban: 'https://cdn.discordapp.com/emojis/926186125289213993.gif?size=128',
-    boot: 'https://cdn.discordapp.com/emojis/926245207509450833.png?size=128',
-    yes: 'https://cdn.discordapp.com/emojis/913396896213659678.png?size=128'
-  },
-  emoji: {
-    yes: '<:yes:913396896213659678>',
-    no: '<:no:913396896201056287>',
-    maybe: '<:maybe:913396896201056286>',
-    cross: '<:crossmark:926180096006557776>',
-    blobban: '<a:blobcatban:926186125289213993>'
-  }
-}
-
-exports.colors = {
-  discord: 3553599, // Discord
-  green: 1482885, // Green
-  red: 13718098, // red
-  shiro: 14207883, // Yellow
-  tan: 16763558, // Tan
-  blue: 6921183, // Blue
-  purple: 16741370, // Purple/boost
-  yellow: 14724172 // Mute Yellow
-}
-
-exports.STRINGS = {
-  imageCommand: {
-    'images/avatars': '',
-    'images/blush': 'Oh my! You made {user} blush!',
-    'images/cry': 'Oh no! You made {user} cry!',
-    'images/hug': 'You\'ve been hugged by {user}!',
-    'images/kiss': 'You\'ve been kissed by {user}!',
-    'images/lick': 'You\'ve been licked by {user}!',
-    'images/neko': '',
-    'images/nom': 'You\'ve been nommed on by {user}!',
-    'images/pat': 'You\'ve been pat by {user}!',
-    'images/poke': 'You\'ve been poked by {user}!',
-    'images/pout': 'Oh no! You made {user} pout!',
-    'images/punch': 'You\'ve been punched by {user}!',
-    'images/slap': 'You\'ve been slapped by {user}!',
-    'images/sleep': 'You sent {user} to sleep!',
-    'images/smug': '',
-    'images/tickle': 'You\'ve been tickled by {user}!',
-    'images/trap': '',
-    'images/wallpapers': ''
-  }
-}
-
-exports.symbols = {
-  DOUBLE_ARROW_RIGHT: '»'
+  api: `${process.env?.DISCORD_API_HOST || 'https://discord.com'}/api/${discordAPIVersion}`,
+  gateway: `${process.env?.DISCORD_API_HOST || 'https://discord.com'}/api/${discordAPIVersion}/gateway/bot`,
+  channels: `${process.env?.DISCORD_API_HOST || 'https://discord.com'}/api/${discordAPIVersion}/channels/`,
+  interactions: `${process.env?.DISCORD_API_HOST || 'https://discord.com'}/api/${discordAPIVersion}/interactions/`,
+  webhooks: `${process.env?.DISCORD_API_HOST || 'https://discord.com'}/api/${discordAPIVersion}/webhooks/`,
+  cdn: 'https://cdn.discordapp.com/'
 }
 
 exports.AUDIT_LOG_TYPES = {

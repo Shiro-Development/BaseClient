@@ -5,7 +5,6 @@ const zlib = require('zlib')
 const ClientCache = require('./cache')
 const util = require('../util')
 const { Interactions } = require('../Class/discord')
-const Redis = require('../Class/Redis')
 const { Influx } = require('../Class/metrics')
 
 /**
@@ -13,29 +12,28 @@ const { Influx } = require('../Class/metrics')
  * @type Class
  */
 class Client extends EventEmitter {
-  constructor () {
+  /**
+   * Client for dispers gateway
+   * @param {Object} options Client configuration options
+   */
+  constructor (options = {
+    botId: '',
+    botToken: '',
+    shardCount: 0,
+    amqp: {
+      host: '',
+      eventExchange: '',
+      cacheExchange: ''
+    }
+  }) {
     super()
+    this.options = options
     this.util = util
     this.user = {
-      id: process.env.BOT_ID
+      id: options.botId
     }
-    /**
-     * Redis Handler
-     * @type {Redis}
-     */
-    this.redis = new Redis('Cache', 0, {
-      host: process.env.REDIS_HOST,
-      port: process.env.REDIS_PORT,
-      auth: process.env.REDIS_AUTH
-    })
-    this.gatewayCache = new Redis('Gateway', 1, {
-      host: process.env.REDIS_HOST,
-      port: process.env.REDIS_PORT,
-      auth: process.env.REDIS_AUTH
-    })
-    this.influxMetrics = new Influx('metrics')
-    this.conn = amqp.createConnection({ url: `amqp://${process.env.AMQP_HOST}` })
-    this.Interactions = Interactions
+    this.conn = amqp.createConnection({ url: `amqp://${options.amqp.host}` })
+    this.Interactions = new Interactions(this)
     /**
      * Cache handler for the bot
      * @type {ClientCache}
@@ -44,8 +42,7 @@ class Client extends EventEmitter {
   }
 
   async amqpReady (client) {
-    client.conn.exchange(process.env.CACHE_EXCHANGE_NAME, { type: 'direct', durable: true, autoDelete: false })
-    client.conn.exchange(process.env.VOICE_EXCHANGE, { type: 'direct', durable: true, autoDelete: false })
+    client.conn.exchange(this.options.amqp.cacheExchange, { type: 'direct', durable: true, autoDelete: false })
 
     // Cache reply queue
     client.conn.queue('', {
@@ -55,7 +52,6 @@ class Client extends EventEmitter {
     }, (queue) => {
       this.cacheReplyName = queue.name
       this.emit('cacheReady')
-      // console.log('Cache Reply Queue: ', this.cacheReplyName)
       queue.subscribe(function (message, _, headers) {
         if (headers.type === '404') {
           client.emit(`cache-${headers.correlationId}`, { response: 404, message: 'Not found' })
@@ -78,7 +74,7 @@ class Client extends EventEmitter {
       }
       delete client.conn.errored
       client.eventQueueName = queue.name
-      queue.bind(process.env.ALL_EVENT_EXCHANGE_NAME, '1000')
+      queue.bind(this.options.amqp.eventExchange, '1000')
       queue.subscribe(function (message) {
         client.influxMetrics.incrementMetric('events')
         message = zlib.inflateSync(message.data)
@@ -95,13 +91,12 @@ class Client extends EventEmitter {
 }
 const client = new Client()
 
-// const open = amqp.connect(`amqp://${process.env.AMQP_HOST}`)
-// const connection = amqp.createConnection({ url: `amqp://${process.env.AMQP_HOST}` })
-
-// add this for better debuging
+/**
+ * Error debugger
+ */
 client.conn.on('error', function (e) {
   client.conn.errored = true
-  process.send ? process.send(`Error from amqp:\n ${e?.stack}`) : console.log('Error from amqp: \n', e?.stack)
+  console.log('Error from amqp: \n', e?.stack)
 })
 
 client.conn.on('ready', () => {

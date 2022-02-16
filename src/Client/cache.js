@@ -42,7 +42,7 @@ class ClientCache {
         resolve(guild)
       })
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
+      this.client.conn.exchanges[this.client.options.cacheExchange].publish(`${this.client.options.botId}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
@@ -79,7 +79,7 @@ class ClientCache {
       })
 
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
+      this.client.conn.exchanges[this.client.options.cacheExchange].publish(`${this.client.options.botId}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
@@ -112,7 +112,7 @@ class ClientCache {
         resolve(user)
       })
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
+      this.client.conn.exchanges[this.client.options.cacheExchange].publish(`${this.client.options.botId}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
@@ -148,7 +148,7 @@ class ClientCache {
         resolve(member)
       })
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
+      this.client.conn.exchanges[this.client.options.cacheExchange].publish(`${this.client.options.botId}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
@@ -184,7 +184,7 @@ class ClientCache {
         resolve(voiceState)
       })
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
+      this.client.conn.exchanges[this.client.options.cacheExchange].publish(`${this.client.options.botId}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
@@ -217,7 +217,7 @@ class ClientCache {
         resolve(roles)
       })
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
+      this.client.conn.exchanges[this.client.options.cacheExchange].publish(`${this.client.options.botId}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
@@ -245,7 +245,7 @@ class ClientCache {
         resolve(stats)
       })
       // Send content to exchange
-      this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
+      this.client.conn.exchanges[this.client.options.cacheExchange].publish(`${this.client.options.botId}-${shardID}`, json, {
         replyTo: this.client.cacheReplyName,
         correlationId: cID
       })
@@ -256,7 +256,7 @@ class ClientCache {
     const json = JSON.stringify({
       t: 999
     })
-    this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-0`, json, {
+    this.client.conn.exchanges[this.client.options.cacheExchange].publish(`${this.client.options.botId}-0`, json, {
       replyTo: this.client.cacheReplyName,
       correlationId: '---'
     })
@@ -273,7 +273,7 @@ class ClientCache {
         self_deaf: false
       }
     })
-    this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-${shardID}`, json, {
+    this.client.conn.exchanges[this.client.options.cacheExchange].publish(`${this.client.options.botId}-${shardID}`, json, {
       replyTo: this.client.cacheReplyName,
       correlationId: '---'
     })
@@ -291,7 +291,7 @@ class ClientCache {
     afk: false
   }) {
     const json = JSON.stringify({ t: 81, d: presence })
-    this.client.conn.exchanges[process.env.CACHE_EXCHANGE_NAME].publish(`${process.env.BOT_ID}-0`, json, {
+    this.client.conn.exchanges[this.client.options.cacheExchange].publish(`${this.client.options.botId}-0`, json, {
       replyTo: this.client.cacheReplyName,
       correlationId: '---'
     })

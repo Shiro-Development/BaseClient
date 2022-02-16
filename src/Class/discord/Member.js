@@ -22,7 +22,7 @@ class Member {
   async removeRole (role) {
     await httpRequestHandler.delete(`${constants.discord.api}/guilds/${this.guildID}/members/${this.id}/roles/${role}`, {
       headers: {
-        Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+        Authorization: `Bot ${this.client.options.botToken}`,
         'User-Agent': 'Discord-bot'
       }
     })
@@ -31,14 +31,14 @@ class Member {
   async addRole (role) {
     await httpRequestHandler.put(`${constants.discord.api}/guilds/${this.guildID}/members/${this.id}/roles/${role}`, {}, {
       headers: {
-        Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+        Authorization: `Bot ${this.client.options.botToken}`,
         'User-Agent': 'Discord-bot'
       }
     })
   }
 
   async getPermissions () {
-    let guildRoles = await this.client.cache.getGuildRoles(parseInt((BigInt(this.guildID) >> 22n) % BigInt(process.env.SHARD_COUNT)), this.guildID)
+    let guildRoles = await this.client.cache.getGuildRoles(parseInt((BigInt(this.guildID) >> 22n) % BigInt(this.client.options.shardCount)), this.guildID)
     guildRoles = guildRoles.filter(r => this.roles.includes(r.id) || r.name === '@everyone')
     guildRoles = guildRoles.map(r => { return { ...r, permissions: new Permissions(r.permissions) } })
     const permissions = {}
