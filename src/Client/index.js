@@ -9,8 +9,6 @@ const { Interactions } = require('../Class/discord')
 const Redis = require('../Class/Redis')
 const { Influx } = require('../Class/metrics')
 const Reminders = require('../Class/database/Reminders')
-const { Shoukaku } = require('shoukaku')
-const ShoukakuWrapper = require('../util/ShoukakuWrapper')
 
 /**
  * Handles the amqp client connection for the bot
@@ -24,19 +22,6 @@ class Client extends EventEmitter {
     this.user = {
       id: process.env.BOT_ID
     }
-    /* Shoukaku */
-    this.nodes = []
-    process.env.LL_NODES.split(' ').forEach(n => {
-      n = n.split('|')
-      this.nodes.push({
-        name: n[0],
-        url: n[1],
-        secure: n[2] === 'true',
-        auth: n[3]
-      })
-    })
-    this.shoukaku = new Shoukaku(new ShoukakuWrapper(this), this.nodes)
-    this.shoukaku.on('error', console.log)
     /**
      * Redis Handler
      * @type {Redis}
